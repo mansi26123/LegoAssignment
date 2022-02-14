@@ -1,0 +1,119 @@
+scalar Long
+type Theme {
+   _id: Long!
+   id: String!
+   name: String!
+   has_parent_theme: [Theme] @relationship(type: "HAS_PARENT_THEME", direction: OUT)
+   sets: [Set] @relationship(type: "HAS_THEME", direction: IN)
+
+}
+
+type Set {
+   _id: Long!
+   name: String!
+   num_parts: Int!
+   set_num: String!
+   year: Int!
+   has_theme: [Theme] @relationship(type: "HAS_THEME", direction: OUT)
+   inventorys: [Inventory] @relationship(type: "INVENTORY_FOR", direction: IN)
+}
+
+type Inventory {
+   _id: Long!
+   id: String!
+   version: String!
+   inventory_for: [Set] @relationship(type: "INVENTORY_FOR", direction: OUT)
+   inventoryparts: [InventoryPart] @relationship(type: "ASSOCIATED_INVENTORY", direction: IN)
+}
+
+type InventoryPart {
+   _id: Long!
+   color_id: String!
+   inventory_id: String!
+   is_spare: Boolean!
+   part_num: String!
+   quantity: String!
+   has_color: [Color] @relationship(type: "HAS_COLOR", direction: OUT)
+   for_part: [Part] @relationship(type: "FOR_PART", direction: OUT)
+   associated_inventory: [Inventory] @relationship(type: "ASSOCIATED_INVENTORY", direction: OUT)
+}
+
+type Part {
+   _id: Long!
+   name: String!
+   part_num: String!
+   has_part_category: [PartCategory] @relationship(type: "HAS_PART_CATEGORY", direction: OUT)
+   inventoryparts: [InventoryPart] @relationship(type: "FOR_PART", direction: IN)
+}
+
+type Color {
+   _id: Long!
+   id: String!
+   is_trans: String!
+   name: String!
+   rgb: String!
+   inventoryparts: [InventoryPart] @relationship(type: "HAS_COLOR", direction: IN)
+}
+
+type PartCategory {
+   _id: Long!
+   id: String!
+   name: String!
+   parts: [Part] @relationship(type: "HAS_PART_CATEGORY", direction: IN)
+}
+
+type Item {
+   _id: Long!
+   name: String!
+}
+
+type Year {
+   _id: Long!
+   Year: String!
+}
+
+type theme {
+   _id: Long!
+   theme: String!
+}
+
+type subtheme {
+   _id: Long!
+   name: String
+   subtheme: String
+}
+
+type pieces {
+   _id: Long!
+   pieces: String!
+}
+
+type GBP_MSRP {
+   _id: Long!
+   GBP_MSRP: String!
+}
+
+type US_MSRP {
+   _id: Long!
+   US_MSRP: String!
+}
+
+type CAD_MSRP {
+   _id: Long!
+   GBP_MSRP: String!
+}
+
+type EUR_MSRP {
+   _id: Long!
+   US_MSRP: String!
+}
+
+type Availability {
+   _id: Long!
+   availability: String!
+}
+
+type Packaging {
+   _id: Long!
+   packaging: String!
+}
