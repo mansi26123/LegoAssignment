@@ -12,12 +12,15 @@ import { useQuery, gql } from '@apollo/client'
 import Title from './Title'
 
 const GET_DATA_QUERY = gql`
-  {
-    ratingsCount {
-      stars
-      count
-    }
-  }
+{
+AvailList{
+  availabilityName
+  CountAvail
+
+
+}
+}
+
 `
 
 export default function RatingsChart() {
@@ -28,29 +31,36 @@ export default function RatingsChart() {
   if (loading) return <p>Loading</p>
 
   return (
+
     <React.Fragment>
-      <Title>Ratings Distribution</Title>
+      <Title>Item Availabilty</Title>
       <ResponsiveContainer>
         <BarChart
-          data={data.ratingsCount}
+          data={data.AvailList}
           margin={{
             top: 16,
             right: 16,
-            bottom: 0,
+            bottom: 20,
             left: 24,
           }}
         >
-          <XAxis dataKey="stars" stroke={theme.palette.text.secondary} />
+          <XAxis
+          dataKey="availabiltyName"
+          stroke={theme.palette.text.secondary}
+          />
+
+
           <YAxis stroke={theme.palette.text.secondary}>
-            <Label
-              angle={270}
-              position="left"
-              style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
-            >
-              Count
+          <Label
+            angle={270}
+            position="left"
+            style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
+          >
+
+            Availabilty
             </Label>
           </YAxis>
-          <Bar dataKey="count" fill={theme.palette.primary.main}></Bar>
+          <Bar dataKey="CountAvail" fill={theme.palette.primary.main}></Bar>
         </BarChart>
       </ResponsiveContainer>
     </React.Fragment>

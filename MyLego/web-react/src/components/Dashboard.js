@@ -22,37 +22,10 @@ export default function Dashboard() {
     },
     fixedHeight: {
       height: 240,
-    }
+    },
   }))
   const classes = useStyles(theme)
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
-
-/*  const neo4j = require("neo4j-driver");
-  const driver = neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "2623"), {
-     encrypted: 'ENCRYPTION_OFF'
-});
-
-  const query = `
-  MATCH (n) return Count(n) AS num
-  `;
-
-//const params = { category: "Dairy Products" };
-
-const session = driver.session({ database: "neo4j" });
-
-session
-    .run(query)
-    .then((result) => {
-        result.records.forEach((record) => {
-            console.log(record);
-        });
-        session.close();
-        driver.close();
-    })
-    .catch((error) => {
-        console.error(error);
-    });*/
-
 
   return (
     <React.Fragment>

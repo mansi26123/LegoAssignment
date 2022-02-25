@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Title from './Title'
 import { useQuery, gql } from '@apollo/client'
+import NumberFormat from "react-number-format";
 
 const useStyles = makeStyles({
   depositContext: {
@@ -14,31 +15,31 @@ const useStyles = makeStyles({
   },
 })
 
-const GET_COUNT_QUERY = gql`
-  {
-    userCount
-  }
+const GET_AVG_QUERY = gql`
+{
+  EURprices
+}
+
+
 `
 
 export default function Deposits() {
   const classes = useStyles()
 
-  const { loading, error, data } = useQuery(GET_COUNT_QUERY)
+  const { loading, error, data } = useQuery(GET_AVG_QUERY)
   if (error) return <p>Error</p>
   return (
     <React.Fragment>
-      <Title>Total Users</Title>
+      <Title>Average Price of Theme in year 2015</Title>
       <Typography component="p" variant="h4">
-        {loading ? 'Loading...' : data.userCount}
+        {loading ? 'Loading...' : data.EURprices}
+
+
       </Typography>
+
       <Typography color="textSecondary" className={classes.depositContext}>
-        users found
+        EUR Prices
       </Typography>
-      <div>
-        <Link to="/users" className={classes.navLink}>
-          View users
-        </Link>
-      </div>
     </React.Fragment>
   )
 }
